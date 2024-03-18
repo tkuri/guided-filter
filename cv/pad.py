@@ -120,8 +120,8 @@ def padding_reflect_101(image, pad_size):
     h, w = pad_size
     ret = np.zeros((shape[0]+2*h, shape[1]+2*w, shape[2]))
 
-    for i in xrange(shape[0]+2*h):
-        for j in xrange(shape[1]+2*w):
+    for i in range(shape[0]+2*h):
+        for j in range(shape[1]+2*w):
             if i < h:
                 if j < w:
                     ret[i, j, :] = image[h-i, w-j, :]
