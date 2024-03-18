@@ -94,6 +94,7 @@ def test_color():
     radius = [20]
     # eps = [0.005]
     eps = [0.0001]
+    itr_num = 5
 
     combs = list(itertools.product(radius, eps))
 
@@ -102,7 +103,10 @@ def test_color():
 
     for r, e in combs:
         GF = GuidedFilter(image, radius=r, eps=e)
-        image_filtered = GF.filter(image_noise)
+        image_filtered = image_noise
+        for i in range(itr_num):
+            print('iteration:', i)
+            image_filtered = GF.filter(image_filtered)
         image_filtered = cv2.resize(image_filtered, None, fx=2.0, fy=2.0)
         image_filtered = cv2.cvtColor(image_filtered, cv2.COLOR_RGB2GRAY)
         cv2.imwrite('data/00095_ppred_mono_fil.png', (image_filtered*65535).astype('uint16'))
